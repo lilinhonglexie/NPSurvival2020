@@ -35,14 +35,15 @@ Besides our proposed approach, the survival models listed below are used to esta
 
 ### Hyperparameter Grid
 
+We performed random hyperparameter search for all models within each of the search spaces specified in [this table](hyperparameters.png); note that for different datasets, our search spaces vary. For each model, we selected the set of hyperparameters that achieved the best cross-validation time-dependent concordance index, as described in the paper.
 
 ## Datasets
 
-A list of supported datasets, data preprocessing scripts and details are documented [here](dataset/).
+A list of supported datasets, data preprocessing scripts and details are documented on [this page](dataset/).
 
 ## Topics
 
-Topics learned by our proposed model on the SUPPORT-3 dataset, visualized in both heatmaps or lists of top words. For other datasets' outputs, go to [here]. Refer to the paper for how these outputs should be interpreted.
+Below are topics learned by our proposed model on the **SUPPORT-3** dataset, visualized in both heatmaps or lists of top words. For all other datasets' outputs, go to [here]. Refer to the paper for how these outputs should be interpreted.
 
 ## Running Experiments
 
