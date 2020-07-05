@@ -5,6 +5,7 @@ A neural network approach that jointly learns a survival model, which predicts t
 ## Table of Contents
 
 * [Models](#models)
+  * [Hyperparameter Grid]
 * [Datasets](#datasets)
 * [Interpretation]
 * [Experiments]
@@ -14,7 +15,7 @@ A neural network approach that jointly learns a survival model, which predicts t
   
 ## Models
 
-Besides our proposed approach, the survival models listed below were used to establish baselines. Each model is linked to its implementation script. These models may take in data in different formats, as documented in the **Data Format** column. The next section explains data format in detail. 
+Besides our proposed approach, the survival models listed below are used to establish baselines. Each model is linked to its implementation script. These models may take in data in different formats, as documented in the **Data Format** column. The next section explains data format in detail. 
 
 | Model  | Descriptions | Type | Data Format |
 | ------ | ------------ | ---- | ----------- |
@@ -32,13 +33,18 @@ Besides our proposed approach, the survival models listed below were used to est
 | [survscholar_linear](survival_topics/SurvScholarModel.py) | Supervised cox regression preceded by [scholar](https://github.com/dallascard/scholar) | topic | discretize |
 | [survscholar_nonlinear](survival_topics/SurvScholarModel.py) | Supervised cox regression preceded by scholar, with nonlinear survival layers | topic | discretize |
 
+### Hyperparameter Grid
+
+
 ## Datasets
 
-Data preprocessing details, scripts and a list of supported datasets are documented [here](dataset/). 
+A list of supported datasets, data preprocessing scripts and details are documented [here](dataset/).
 
-## Interpretations
+## Topics
 
-## Experiments
+Topics learned by our proposed model on the SUPPORT-3 dataset, visualized in both heatmaps or lists of top words. For other datasets' outputs, go to [here]. Refer to the paper for how these outputs should be interpreted.
+
+## Running Experiments
 
 ### Required packages
 
