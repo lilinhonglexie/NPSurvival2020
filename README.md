@@ -8,8 +8,8 @@ A neural network approach that jointly learns a survival model, which predicts t
   * [Hyperparameter grid](#hyperparameter-grid)
   * [Selecting the number of topics](#selecting-the-number-of-topics)
 * [Datasets](#datasets)
-* [Topics Learned]
-* [Experiments]
+* [Topics Learned](#topics-learned-model-outputs)
+* [Running experiments](#running-experiments)
   * [Requirements]
   * [Running Instructions]
   * [Demo]
