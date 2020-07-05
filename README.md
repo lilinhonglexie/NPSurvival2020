@@ -1,27 +1,20 @@
-# NPSurvival2020
+# Neural Topic Models with Survival Supervision
 
-Public repository for Neural Topic Models with Survival Supervision
+A neural network approach that jointly learns a survival model, which predicts time-to-event outcomes, and a topic model, which captures how features relate. This repository records this approach's empirical performance on seven healthcare datasets. 
 
-## Table of Content
+## Table of Contents
 
-* [Requirements](#required-packages)
-* [Datasets & Models](#required-packages)
-* [Experiments & Demo](#required-packages)
-  * [Model Outputs](#required-packages)
+* [Models]
+* [Datasets]
+* [Interpretation]
+* [Experiments]
+  * [Requirements]
+  * [Running Instructions]
+  * [Demo]
+  
+## Models
 
-## Required packages
-
-Package requirements could be found [here](requirements.txt). You could set up the required environment in the command line: 
-
-```
->>> python3 -m venv env_npsurvival
->>> source env_npsurvival/bin/activate
->>> pip3 install -r Survival2019/requirements.txt
-```
-
-## Datasets and Models
-
-Data preprocessing details, scripts and a list of supported datasets are documented [here](dataset/). A list of implemented survival models could be found below. The **Data Format** column is explained in detail on [this page](dataset/). Each model is linked to its implementation script.
+Besides our proposed approach, the survival models listed below were used to establish baselines. Each model is linked to its implementation script. These models may take in data in different formats, as documented in the **Data Format** column. The next section explains data format in detail. 
 
 | Model  | Descriptions | Type | Data Format |
 | ------ | ------------ | ---- | ----------- |
@@ -39,7 +32,25 @@ Data preprocessing details, scripts and a list of supported datasets are documen
 | [survscholar_linear](survival_topics/SurvScholarModel.py) | Supervised cox regression preceded by [scholar](https://github.com/dallascard/scholar) | topic | discretize |
 | [survscholar_nonlinear](survival_topics/SurvScholarModel.py) | Supervised cox regression preceded by scholar, with nonlinear survival layers | topic | discretize |
 
-## Running Experiments
+## Datasets
+
+Data preprocessing details, scripts and a list of supported datasets are documented [here](dataset/). 
+
+## Interpretations
+
+## Experiments
+
+### Required packages
+
+Package requirements could be found [here](requirements.txt). You could set up the required environment in the command line: 
+
+```
+>>> python3 -m venv env_npsurvival
+>>> source env_npsurvival/bin/activate
+>>> pip3 install -r Survival2019/requirements.txt
+```
+
+### Running Experiments
 
 To run an experiment:
 
@@ -50,7 +61,7 @@ To run an experiment:
 5. Modify experiment settings in the bash script ```run_experiments.sh```, and type ```sh run_experiments.sh``` in the command line.
 6. This will kick off the experiment. Be sure to name experiments properly using the ```experiment_id``` option, and note that rerunning using the same ```experiment_id``` will erase saved outputs from the last experiment with the same ```experiment_id```. Results reported in the submitted paper are also saved under their respective ```experiment_id```, so make sure you are not erasing them by mistake.
 
-### Demo: SurvScholar + METABRIC
+#### Demo: SurvScholar + METABRIC
 
 Follow this demo to see how experiments are configured.
 
@@ -93,6 +104,6 @@ Experiment outputs will be saved to ```${log_dir}/${dataset}/${model}/${experime
 
 As documented in the experiment transcript [here](logs/METABRIC/survscholar_linear/bootstrap_predictions_demo_explain/transcript.txt), using only 5 random hyperparameter combinations, we get mean bootstrapped time-dependent c-index **0.66058302** on the test set. (95% confidence interval **\[0.62127882, 0.70199634\]**).
 
-## Heatmaps
+### Generating Heatmaps
 
 For SurvScholar, [this notebook](run_visualizations.ipynb) demonstrates how to obtain the all-topic heatmaps, single-topic heatmaps, and per topic top-words printouts. Running visualization requires you to specify a directory that contains the saved model outputs, which is usually ```${log_dir}/${dataset}/${model}/${experiment_id}/```. In the notebook, we used an experiment on the SUPPORT_Cancer dataset, whose ```experiment_id``` is ```bootstrap_predictions_3_explain```. 
