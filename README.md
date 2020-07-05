@@ -4,8 +4,8 @@ A neural network approach that jointly learns a survival model, which predicts t
 
 ## Table of Contents
 
-* [Models]
-* [Datasets]
+* [Models](#models)
+* [Datasets](#datasets)
 * [Interpretation]
 * [Experiments]
   * [Requirements]
