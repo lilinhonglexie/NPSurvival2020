@@ -5,9 +5,10 @@ A neural network approach that jointly learns a survival model, which predicts t
 ## Table of Contents
 
 * [Models](#models)
-  * [Hyperparameter Grid]
+  * [Hyperparameter grid](#hyperparameter-grid)
+  * [Selecting number of topics](#selecting-number-of-topics)
 * [Datasets](#datasets)
-* [Interpretation]
+* [Topics Learned]
 * [Experiments]
   * [Requirements]
   * [Running Instructions]
@@ -37,13 +38,17 @@ Besides our proposed approach, the survival models listed below are used to esta
 
 We performed random hyperparameter search for all models within each of the search spaces specified in [this table](hyperparameters.png); note that for different datasets, our search spaces vary. For each model, we selected the set of hyperparameters that achieved the best cross-validation time-dependent concordance index, as described in the paper.
 
+### Selecting Number of Topics
+
+In the paper, we described how we selected the number of topics for each dataset by looking at training cross-validation c-index vs number of topics. [This](topics_learned/SUPPORT-3_Cancer_select_topic_number_plot.pdf) is a plot of training cross-validation c-index vs number of topics on the **SUPPORT-3** dataset. For all other datasets' outputs, go to [here](topics_learned/).
+
 ## Datasets
 
 A list of supported datasets, data preprocessing scripts and details are documented on [this page](dataset/).
 
 ## Topics
 
-Below are topics learned by our proposed model on the **SUPPORT-3** dataset, visualized in both heatmaps or lists of top words. For all other datasets' outputs, go to [here]. Refer to the paper for how these outputs should be interpreted.
+Below are topics learned by our proposed model on the **SUPPORT-3** dataset, visualized in both heatmaps or lists of top words. For all other datasets' outputs, go to [here](topics_learned/). Refer to the paper for how these outputs should be interpreted.
 
 ## Running Experiments
 
