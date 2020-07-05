@@ -2,6 +2,13 @@
 
 Public repository for Neural Topic Models with Survival Supervision
 
+## Table of Content
+
+* [Requirements](#required-packages)
+* [Datasets & Models](#required-packages)
+* [Experiments & Demo](#required-packages)
+  * [Model Outputs](#required-packages)
+
 ## Required packages
 
 Package requirements could be found [here](requirements.txt). You could set up the required environment in the command line: 
