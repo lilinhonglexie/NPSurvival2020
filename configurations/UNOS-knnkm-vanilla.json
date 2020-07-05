@@ -1,0 +1,2 @@
+{"params": {"n_neighbors": [1, 1000]}, 
+ "random": {"n_probes": 20}}

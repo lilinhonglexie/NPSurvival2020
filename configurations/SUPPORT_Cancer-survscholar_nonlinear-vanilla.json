@@ -1,0 +1,3 @@
+{"params": {"n_topics": [3, 10], "survival_loss_weight": [0, 5], "batch_size": [32, 1024],
+            "survival_layers": [1, 4], "survival_layers_size": [4, 32], "survival_layers_dropout":[0, 0.7]},
+ "random": {"n_probes": 100}}

@@ -1,0 +1,1 @@
+{"params": {"layers": [1, 4], "nodes_per_layer": [32, 128], "dropout": [0, 0.7], "weight_decay": [0, 0.4], "batch_size": [32, 1024]}, "random": {"n_probes": 200}}

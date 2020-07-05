@@ -1,0 +1,2 @@
+{"params": {"n_topics":[3, 10], "alpha0":[-1, 1]},
+"random": {"n_probes": 20}}

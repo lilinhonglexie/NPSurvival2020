@@ -1,0 +1,2 @@
+{"params": {"survival_loss_weight": [0, 5], "batch_size": [512, 4096]}, 
+ "random": {"n_probes": 5}}

@@ -1,0 +1,2 @@
+{"params": {"max_features": [3, 10], "min_samples_leaf": [1, 200]}, 
+ "random": {"n_probes": 20}}

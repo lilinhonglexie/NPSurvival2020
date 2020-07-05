@@ -1,0 +1,2 @@
+{"params": {"lambda_": [0, 0.99], "n_components": [1, 100]}, 
+ "random": {"n_probes": 20}}
