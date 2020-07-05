@@ -1,0 +1,18 @@
+Loading METABRIC dataset...
+  Total samples=1981
+  Total features=107
+Configuring experiments...
+  Model=survscholar_linear
+  Params={'params': {'n_topics': [1, 10], 'survival_loss_weight': [0, 5], 'batch_size': [32, 1024]}, 'random': {'n_probes': 5}}
+  Tuning scheme=random
+  CV folds=5; Train/Test Split Repeats=5
+Runing 5 train/test splits for error bars...
+  Training fraction=0.8
+  Random seed=47
+  >> Iter 0 best params:  {'batch_size': 380.6560634455598, 'n_topics': 7.368446244331729, 'survival_loss_weight': 3.9980230083002692}
+  >> Iter 0 metrics:  {'concordance_antolini': 0.6600986389718784, 'concordance_median': 0.6600986389718784, 'integrated_brier': 0.6600986389718784, 'rmse': 0.6600986389718784, 'mae': 0.6600986389718784}
+  >> Iter 0 bootstrapped : MEAN [0.66058302 0.66058302 0.66058302 0.66058302 0.66058302]
+  >> Iter 0 bootstrapped : MEDIAN [0.65976256 0.65976256 0.65976256 0.65976256 0.65976256]
+  >> Iter 0 bootstrapped : Q=0.025 [0.62127882 0.62127882 0.62127882 0.62127882 0.62127882]
+  >> Iter 0 bootstrapped : Q=0.975 [0.70199634 0.70199634 0.70199634 0.70199634 0.70199634]
+Finished!
