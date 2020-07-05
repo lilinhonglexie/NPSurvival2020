@@ -22,7 +22,7 @@ scipy==1.4.1
 shap==0.35.0
 sklearn==0.0
 sklearn-pandas==1.8.0
-tensorflow==1.10.0
+tensorflow==1.15.2
 tf-slim==1.0
 Theano==1.0.4
 torch==1.4.0
