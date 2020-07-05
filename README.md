@@ -40,7 +40,7 @@ We performed random hyperparameter search for all models within each of the sear
 
 ### Selecting the Number of Topics
 
-In the paper, we described how we selected the number of topics for each dataset by looking at training cross-validation c-index vs number of topics. [This](topics_learned/SUPPORT-3_Cancer_select_topic_number_plot.pdf) is a plot of training cross-validation c-index vs number of topics on the **SUPPORT-3** dataset. For all other datasets' outputs, go to [here](topics_learned/).
+In the paper, we described how we selected the number of topics for each dataset by looking at training cross-validation c-index vs number of topics. Refer to [this figure](select_number_of_topics.png) for a plot of all datasets' training cross-validation c-index vs number of topics.
 
 ## Datasets
 
