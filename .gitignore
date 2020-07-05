@@ -1,0 +1,9 @@
+dataset/**/*.npy
+dataset/original_data/*.csv
+dataset/original_data/*.DAT
+dataset/original_data/**/*.csv
+dataset/original_data/**/*.txt
+logs/**/**/**/saved_models/
+logs/**/**/**/saved_model*
+logs/**/**/**/*.pickle
+graphs/
