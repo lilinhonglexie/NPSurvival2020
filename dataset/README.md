@@ -80,5 +80,5 @@ If you want to add in a new dataset in the folder, simply make sure the set of f
 <a id="1">[1]</a> 
 W. A. Knaus, F. E. Harrell, J. Lynn, L. Goldman, R. S. Phillips, A. F. Connors,N. V. Dawson, W. J. Fulkerson, R. M. Califf, and N. Desbiens. The SUPPORTprognostic model: Objective estimates of survival for seriously ill hospitalizedadults.Annals of Internal Medicine, 122(3):191–203, 1995.
 
-<a id="1">[2]</a> 
+<a id="2">[2]</a> 
 F. E. Harrell Jr.Regression  Modeling  Strategies:  With  Applications  to  LinearModels,  Logistic  and  Ordinal  Regression,  and  Survival  Analysis.   Springer,2015.
