@@ -107,7 +107,7 @@ An experimented-ready dataset is a folder named after the dataset. In the folder
 - *F.npy*: Feature names. Taken in by models.
 - *feature_list.txt*: Feature names, for humans to read.
 
-Each one of the three data formats will have a set of these. Take *X.npy*, for example, expect *X_cox.npy*, *X_discretized.npy*, and *X.npy* to contain feature matrices in the formats of *cox*, *discretized*, and *original*.
+Each one of the three data formats will have a set of these. Take *X.npy*, for example, our naming convention expects *X_cox.npy*, *X_discretized.npy*, and *X.npy* to contain feature matrices in the formats of *cox*, *discretized*, and *original*.
 
 ## References
 <a id="1">[1]</a> 
