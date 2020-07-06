@@ -22,7 +22,7 @@ Besides our proposed approach, the survival models listed below are used to esta
 | Model  | Descriptions | Type | Data Format |
 | ------ | ------------ | ---- | ----------- |
 | [coxph](survival_baselines/CoxPHModel.py)  | Cox regression with lasso regularization | baseline | cox |
-| [coxph_pca](survival_baselines/survival_baselines/CoxPHModel.py) | Lasso-regularized cox preceded by PCA | baseline | original |
+| [coxph_pca](survival_baselines/CoxPHModel.py) | Lasso-regularized cox preceded by PCA | baseline | original |
 | [coxph_unreg](survival_baselines/CoxPHModel.py) | Unregualrized cox regression        | baseline | cox |
 | [knnkm](survival_baselines/KNNKaplanMeier.py) | KNN-Kaplan-Meier | baseline | original |
 | [knnkm_pca](survival_baselines/KNNKaplanMeier.py) | KNN-Kaplan-Meier preceded by PCA | baseline | original |
