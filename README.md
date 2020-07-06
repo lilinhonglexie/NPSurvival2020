@@ -1,18 +1,19 @@
 # Neural Topic Models with Survival Supervision
 
-A neural network approach that jointly learns a survival model, which predicts time-to-event outcomes, and a topic model, which captures how features relate. This repository records this approach's empirical performance on seven healthcare datasets. 
+A neural network approach that jointly learns a survival model, which predicts time-to-event outcomes, and a topic model, which captures how features relate. We tested this approach on seven healthcare datasets.  
 
 ## Table of Contents
 
 * [Models](#models)
-  * [Hyperparameter grid](#hyperparameter-grid)
-  * [Selecting the number of topics](#selecting-the-number-of-topics)
+  * [Hyperparameter Grid](#hyperparameter-grid)
+  * [Selecting the Number of Topics](#selecting-the-number-of-topics)
 * [Datasets](#datasets)
 * [Topics Learned](#topics-learned-model-outputs)
-* [Running experiments](#running-experiments)
-  * [Requirements]
+* [Running Experiments](#running-experiments)
+  * [Requirements](#required-packages)
   * [Running Instructions]
   * [Demo]
+  * [Visualizing Topics Learned]
   
 ## Models
 
@@ -56,7 +57,9 @@ Topics learned by our proposed approach are either visualized in heatmaps or lis
 
 ## Running Experiments
 
-### Required packages
+Follow this section to replicate results in the paper. 
+
+### Required Packages
 
 Package requirements could be found [here](requirements.txt). You could set up the required environment in the command line: 
 
@@ -72,10 +75,10 @@ To run an experiment:
 
 1. ```git clone``` this repo to a local directory.
 2. Make sure all required packages are installed (see section **Required packages**).
-3. ```cd``` into the repo directory, replace the ```dataset/``` folder with one that actually contains the data. On George's server, such folder could be found at ```/media/latte/npsurvival/dataset```.
+3. ```cd``` into the repo directory, replace the ```dataset/``` folder with one that actually contains the data. Data is omitted in this repo because some of our datasets require applying for access.
 4. Make sure hyperparameter search boxes are configured in a ```json``` file under ```configurations/```. You could find plenty of examples [here](configurations/). 
 5. Modify experiment settings in the bash script ```run_experiments.sh```, and type ```sh run_experiments.sh``` in the command line.
-6. This will kick off the experiment. Be sure to name experiments properly using the ```experiment_id``` option, and note that rerunning using the same ```experiment_id``` will erase saved outputs from the last experiment with the same ```experiment_id```. Results reported in the submitted paper are also saved under their respective ```experiment_id```, so make sure you are not erasing them by mistake.
+6. This will kick off the experiment. Be sure to name experiments properly using the ```experiment_id``` option, and note that rerunning using the same ```experiment_id``` will erase saved outputs from the last experiment with the same ```experiment_id```. 
 
 #### Demo: SurvScholar + METABRIC
 
@@ -104,7 +107,7 @@ model=survscholar_linear
 n_outer_iter=5                 
 tuning_scheme=random           
 tuning_config=demo       # this will locate the configuration json file to be METABRIC-survscholar_linear-demo.json         
-log_dir=logs                   
+log_dir=logs             # directory where experiment outputs are saved                
 experiment_id=bootstrap_predictions_demo_explain 
 saved_experiment_id=None       
 saved_model_path=saved_models  
@@ -116,10 +119,10 @@ mkdir -p ${log_dir}/${dataset}/${model}/${experiment_id}/${saved_model_path}
 python3 experiments.py ${dataset} ${model} ${n_outer_iter} ${tuning_scheme} ${tuning_config} ${experiment_id} ${saved_experiment_id} ${readme_msg} ${preset_dir} --log_dir ${log_dir}
 ```
 
-Experiment outputs will be saved to ```${log_dir}/${dataset}/${model}/${experiment_id}/```. For this demo, this evaluates to [```logs/METABRIC/survscholar_linear/bootstrap_predictions_demo_explain/```](logs/METABRIC/survscholar_linear/bootstrap_predictions_demo_explain). Some experiment outputs, such as saved models, and ```pickle``` objects used for plotting the heatmaps are not synced to GitHub (see [```.gitignore```](.gitignore)). You will need to navigate to the local directory to obtain those.
+Experiment outputs will be saved to ```${log_dir}/${dataset}/${model}/${experiment_id}/```. For this demo, this evaluates to [```logs/METABRIC/survscholar_linear/bootstrap_predictions_demo_explain/```](logs/METABRIC/survscholar_linear/bootstrap_predictions_demo_explain). 
 
 As documented in the experiment transcript [here](logs/METABRIC/survscholar_linear/bootstrap_predictions_demo_explain/transcript.txt), using only 5 random hyperparameter combinations, we get mean bootstrapped time-dependent c-index **0.66058302** on the test set. (95% confidence interval **\[0.62127882, 0.70199634\]**).
 
 ### Generating Heatmaps
 
-For SurvScholar, [this notebook](run_visualizations.ipynb) demonstrates how to obtain the all-topic heatmaps, single-topic heatmaps, and per topic top-words printouts. Running visualization requires you to specify a directory that contains the saved model outputs, which is usually ```${log_dir}/${dataset}/${model}/${experiment_id}/```. In the notebook, we used an experiment on the SUPPORT_Cancer dataset, whose ```experiment_id``` is ```bootstrap_predictions_3_explain```. 
+For SurvScholar, [this notebook](run_visualizations.ipynb) demonstrates how to obtain the all-topic heatmaps, single-topic heatmaps, and per topic top-words printouts. Running visualization requires you to specify a directory that contains the saved model outputs, which is usually ```${log_dir}/${dataset}/${model}/${experiment_id}/```. In the notebook, we used an experiment on the SUPPORT_Cancer dataset, whose ```experiment_id``` is ```bootstrap_predictions_3_explain```.
