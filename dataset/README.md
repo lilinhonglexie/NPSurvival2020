@@ -1,18 +1,22 @@
 # Survival Datasets
 
-Because some datasets require applying for access or are simply too large, we did not include the actual data in this repo. To be able to run any experiments, after git cloning, make sure to populate this **dataset/** directory with actual data. A dataset should correspond to a folder with the same name as the dataset and containing all files detailed in [this section].
+We tested baselines and our proposed approach on 7 heathcare datasets, whose origins and preprocessing we describe below.
+
+Because some datasets require applying for access or are simply too large, we did not include the actual data in this repo. To be able to run any experiments, after git cloning, make sure to populate this **dataset/** directory with actual data. A dataset should correspond to a folder with the same name as the dataset and containing all files detailed in [this section](#processed-datasets).
 
 ## Table of Contents
 
-* [Dataset Descriptions]
+* [Dataset Descriptions](#dataset-descriptions)
   * [SUPPORT](#support)
   * [UNOS](#unos)
   * [METABRIC](#metabric)
-  * [MIMIC(Ich)]
-* [Preprocessing]
-* [Preprocessed Format]
+  * [MIMIC(Ich)](#mimicich)
+* [Preprocessing](#preprocessing)
+* [Preprocessed Format](#processed-datasets)
 
 ## Dataset Descriptions
+
+A summary table followed by detailed description for each dataset.
 
 | Dataset  | Descriptions | # Subjects | # Features | % Censored |
 | -------- | ------------ | ---------- | ---------- | ---------- |
