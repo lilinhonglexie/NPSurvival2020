@@ -11,9 +11,9 @@ A neural network approach that jointly learns a survival model, which predicts t
 * [Topics Learned](#topics-learned-model-outputs)
 * [Running Experiments](#running-experiments)
   * [Requirements](#required-packages)
-  * [Running Instructions]
-  * [Demo]
-  * [Visualizing Topics Learned]
+  * [Tutorial](#running-experiments-1)
+    * [Demo](#demo-survscholar--metabric)
+  * [Visualizing Topics Learned](#generating-heatmaps)
   
 ## Models
 
