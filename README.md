@@ -17,7 +17,7 @@ A neural network approach that jointly learns a survival model, which predicts t
   
 ## Models
 
-Besides our proposed approach, the survival models listed below are used to establish baselines. Each model is linked to its implementation script. These models may take in data in different formats, as documented in the **Data Format** column. The next section explains data format in detail. 
+Besides our proposed approach, the survival models listed below are used to establish baselines. Each model is linked to its implementation script. These models may take in data in different formats, as documented in the **Data Format** column. The [next section](#datasets) explains data format in detail. 
 
 | Model  | Descriptions | Type | Data Format |
 | ------ | ------------ | ---- | ----------- |
