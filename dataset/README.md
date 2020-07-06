@@ -1,6 +1,16 @@
 # Survival Datasets
 
-This directory contains description and preprocessing scripts for all datasets used for our experiments.
+Because some datasets require applying for access or are simply too large, we did not include the actual data in this repo. To be able to run any experiments, after git cloning, make sure to populate this **dataset/** directory with actual data. A dataset should correspond to a folder with the same name as the dataset and containing all files detailed in [this section].
+
+## Table of Contents
+
+* [Dataset Descriptions]
+  * [SUPPORT]
+  * [UNOS]
+  * [METABRIC]
+  * [MIMIC(Ich)]
+* [Preprocessing]
+* [Preprocessed Format]
 
 ## Dataset Descriptions
 
@@ -14,7 +24,9 @@ This directory contains description and preprocessing scripts for all datasets u
 | METABRIC  | breast cancer  | 1981 | 24 | 55.2% |
 | MIMIC-Ich  | intracerebral hemorrhage  | 1010 | 1157 | 0% |
 
-Please refer to the AIME submission for more detailed descriptions of the datasets. Because some datasets require applying for access or are simply too large, we did not include the actual data in this repo. Instead, to run any experiments, after git cloning this repo, make sure to replace this entire **dataset/** directory with the one that actually contains data in it. The later will be made available to anyone who has access to George's server.
+### SUPPORT
+
+The dataset from the Study to Understand Prognoses Preferences Outcomes and Risks of Treatment (SUPPORT)[[1]](#1) is freely available [online](http://biostat.mc.vanderbilt.edu/wiki/Main/SupportDesc). This dataset contains 14 clinical features collected from seriously ill hospitalized adults, such as their age, presence of cancer, and neurologic function. These features were collected from patients on the third day after the study started, and patients were followed for survival until 180 days after the study entry. For our purposes, the dataset was split into four datasets corresponding to different disease groups (acute respiratory failure/multiple organ system failure, cancer, coma, COPD/congestive heart failure/cirrhosis), as done by [[2]](#2). After we created these four subsets, all subjects from the cancer group have identical values for a clinical feature related to cancer presence, so this feature was removed only for the cancer cohort, resulting in 13 clinical features for the **SUPPORT-3** dataset.
 
 ## Preprocessing
 
@@ -63,3 +75,10 @@ All processed datasets live in their individual folders, in experiment-ready for
 Each one of the three data formats will have a set of these. The files' names should explain themselves.
 
 If you want to add in a new dataset in the folder, simply make sure the set of files described above is available under a directory named after the dataset.
+
+## References
+<a id="1">[1]</a> 
+W. A. Knaus, F. E. Harrell, J. Lynn, L. Goldman, R. S. Phillips, A. F. Connors,N. V. Dawson, W. J. Fulkerson, R. M. Califf, and N. Desbiens. The SUPPORTprognostic model: Objective estimates of survival for seriously ill hospitalizedadults.Annals of Internal Medicine, 122(3):191–203, 1995.
+
+<a id="1">[2]</a> 
+F. E. Harrell Jr.Regression  Modeling  Strategies:  With  Applications  to  LinearModels,  Logistic  and  Ordinal  Regression,  and  Survival  Analysis.   Springer,2015.
