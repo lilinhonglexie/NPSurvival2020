@@ -12,7 +12,9 @@ Because some datasets require applying for access or are simply too large, we di
   * [METABRIC](#metabric)
   * [MIMIC(Ich)](#mimicich)
 * [Preprocessing](#preprocessing)
-* [Preprocessed Format](#processed-datasets)
+  * [Features & Data Formats](#preprocessing-explained)
+  * [Scripts](#preprocessing-scripts)
+* [Preprocessing Outcome](#processed-datasets)
 
 ## Dataset Descriptions
 
@@ -48,17 +50,20 @@ Features extracted include demographics, medications, billing codes, procedures,
 
 ## Preprocessing
 
-Each datasets came in in different formats, and we added these datasets throughout the time I worked on this project. Therefore, there is currently no unified data preprocessing script, and each dataset is handled slighly differently by the following scripts:
+### Preprocessing Explained
 
-#### [METABRIC & SUPPORT](preprocessing_metabric_support.py)
+For all of our datasets, categorical features were one-hot encoded. Specifically to the Cox proportional hazards and lasso-regularized Cox baselines, for each categorical feature, one category was removed as the reference column. For methods that use topic modeling, we realized it does not make sense to encode numeric clinical events as they are. Instead, numeric clinical events were treated as categorical by mapping observed values to equally spaced ranges by quantile (5 bins of roughly equal number of subjects per bin). When values of a numeric clinical event are highly cluttered, the number of bins could go below 5 and result in bins with unequal number of subjects.
 
-#### [MIMIC2 Datasets: Ich, Pancreatitis, Sepsis](preprocessing_mimic2.py)
-Feature engineering logic is implemented [here](preprocessing_mimic2_lib/FeatureEngineerNew2.py). 
+#### Features for the MIMIC(Ich) dataset were created slightly differently.
 
-#### [UNOS](preprocessing_unos.ipynb)
-This notebook tries to recover UNOS's preprocessing in some previous papers. Please do not share this file with unauthorized users of the UNOS data.
+Our definition of clinical events mean that a subject can have multiple instances of one event; for example, one patient might have multiple results for a particular lab test on file. Under this case, single-occurrence categorical events (e.g., gender) were one-hot encoded as usual; multiple-occurrence categorical events (e.g., urine color) were encoded by counting each category's occurrences in a single subject's records. For numeric clinical events, as a subject may have a list of numeric values recorded, we engineered numeric features that captured the minimum, maximum, median, and length of a subject's list of recordings. However, this was not necessary for methods that use topic modeling, because mapping values to equally spaced bins took care of multiple-occurrence numeric events for us.
 
-#### The three data formats
+#### Handling Missingness
+
+We would also like to note that missing records were not imputed as missing certain events can have clinical significance. Therefore, for features with incomplete records, the missing entries were first filled with zeros, and then an additional feature was added solely to indicate whether missingness is observed for each subject; this approach to handling missing data is motivated by the work of [[7]](#7). While we added features that solely indicate missingness for all baseline methods, methods that use topic modeling do not require encoding missingness explicitly. For topic modeling based methods, feature vectors encode number of occurrences, so a patient with missing feature simply has that feature's number of occurrences set to 0. For this reason, we did not explicitly encode missingness as a separate feature for methods that use topic modeling.
+
+#### This gives rise to our three data formats.
+
 Across scripts, you will find that there are three data formats one could output, "cox", "original", and "discretize". 
 
 - **Mode "cox"** refers to one-hot encoding all categorical features, with one reference column removed per categorical feature; each feature that has missing entries will also have a separate feature indicating whether a subject is missing information for this feature; this format should be used for any models that directly apply Cox regression on input data. 
@@ -67,7 +72,7 @@ Across scripts, you will find that there are three data formats one could output
 
 - **Mode "discretize"** refers to one-hot encoding all categorical features, **without** removing a reference column per feature; besides, continuous features are discretized by percentiles; also, there are no features that explicitly encode missingness like the two formats above; this format should be used for any models that apply topic modelling on input data. 
 
-Applying different formats will give you datasets with different number of features. For sanity checks, please check the dataset you use against the dimensions I had below:
+Applying different formats will give you datasets with different number of features. To reproduce our results, please check the dataset you use against the dimensions we had below:
 
 | Dataset  | # Subjects | # Features (cox) | # Features (original) | # Features (discretize) | 
 | -------- | ---------- | ---------------- | --------------------- | ----------------------- | 
@@ -81,34 +86,47 @@ Applying different formats will give you datasets with different number of featu
 | MIMIC-Pancreatitis  | 371 | 1858 | 1926 | 1985 |
 | MIMIC-Sepsis  |  12612 | 3871 | 3896 | 4030 |
 
+### Preprocessing Scripts
+
+Each datasets came in in different formats, so each dataset's preprocessing is handled slighly differently by the following scripts:
+
+#### [METABRIC & SUPPORT](preprocessing_metabric_support.py)
+
+#### [MIMIC2 Datasets: Ich, Pancreatitis, Sepsis](preprocessing_mimic2.py)
+Feature engineering logic is implemented [here](preprocessing_mimic2_lib/FeatureEngineerNew2.py). 
+
+#### [UNOS](preprocessing_unos.ipynb)
+This notebook tries to recover UNOS's preprocessing in some previous papers. Please do not share this file with unauthorized users of the UNOS data.
+
 ## Processed Datasets
 
-All processed datasets live in their individual folders, in experiment-ready format. In each dataset's folder, you will find:
+An experimented-ready dataset is a folder named after the dataset. In the folder, the following should be present:
 
 - *X.npy*: Feature matrix, where each row is a patient, and each column is a feature. Taken in by models. 
 - *Y.npy*: Labels, with a column containing survival times, and a column containing censoring indicators. Taken in by models.
 - *F.npy*: Feature names. Taken in by models.
 - *feature_list.txt*: Feature names, for humans to read.
 
-Each one of the three data formats will have a set of these. The files' names should explain themselves.
-
-If you want to add in a new dataset in the folder, simply make sure the set of files described above is available under a directory named after the dataset.
+Each one of the three data formats will have a set of these. Take *X.npy*, for example, expect *X_cox.npy*, *X_discretized.npy*, and *X.npy* to contain feature matrices in the formats of *cox*, *discretized*, and *original*.
 
 ## References
 <a id="1">[1]</a> 
-W. A. Knaus, F. E. Harrell, J. Lynn, L. Goldman, R. S. Phillips, A. F. Connors,N. V. Dawson, W. J. Fulkerson, R. M. Califf, and N. Desbiens. The SUPPORTprognostic model: Objective estimates of survival for seriously ill hospitalizedadults.Annals of Internal Medicine, 122(3):191–203, 1995.
+W. A. Knaus, F. E. Harrell, J. Lynn, L. Goldman, R. S. Phillips, A. F. Connors,N. V. Dawson, W. J. Fulkerson, R. M. Califf, and N. Desbiens. The SUPPORT prognostic model: Objective estimates of survival for seriously ill hospitalized adults. Annals of Internal Medicine, 122(3):191–203, 1995.
 
 <a id="2">[2]</a> 
 F. E. Harrell Jr.Regression  Modeling  Strategies:  With  Applications  to  LinearModels,  Logistic  and  Ordinal  Regression,  and  Survival  Analysis. Springer,2015.
 
 <a id="3">[3]</a> 
-C. Lee, W. R. Zame, J. Yoon, and M. van der Schaar. DeepHit: A deep learningapproach to survival analysis with competing risks.  InAAAI  Conference  onArtificial Intelligence, 2018
+C. Lee, W. R. Zame, J. Yoon, and M. van der Schaar. DeepHit: A deep learning approach to survival analysis with competing risks.  In AAAI Conference on Artificial Intelligence, 2018
 
 <a id="4">[4]</a> 
-J. Yoon, W. R. Zame, A. Banerjee, M. Cadeiras, A. M. Alaa, and M. van derSchaar.  Personalized survival predictions via trees of predictors: An applica-tion to cardiac transplantation.PloS One, 13(3), 2018.
+J. Yoon, W. R. Zame, A. Banerjee, M. Cadeiras, A. M. Alaa, and M. van derSchaar. Personalized survival predictions via trees of predictors: An application to cardiac transplantation. PloS One, 13(3), 2018.
 
 <a id="5">[5]</a> 
-C.  Curtis,  S.  P.  Shah,  S.-F.  Chin,  G.  Turashvili,  O.  M.  Rueda,  M.  J.  Dun-ning, D. Speed, A. G. Lynch, S. Samarajiwa, and Y. Yuan.  The genomic andtranscriptomic architecture of 2,000 breast tumours reveals novel subgroups.Nature, 486(7403):346, 2012.
+C.  Curtis,  S.  P.  Shah,  S.-F.  Chin,  G.  Turashvili,  O.  M.  Rueda,  M.  J.  Dun-ning, D. Speed, A. G. Lynch, S. Samarajiwa, and Y. Yuan. The genomic and transcriptomic architecture of 2,000 breast tumours reveals novel subgroups. Nature, 486(7403):346, 2012.
 
 <a id="6">[6]</a> 
-A. E. Johnson, T. J. Pollard, L. Shen, L.-w. H. Lehman, M. Feng, M. Ghassemi,B.  Moody,  P.  Szolovits,  L.  A.  Celi,  and  R.  G.  Mark.   MIMIC-III,  a  freelyaccessible critical care database.Scientific Data, 3, 2016.
+A. E. Johnson, T. J. Pollard, L. Shen, L.-w. H. Lehman, M. Feng, M. Ghassemi,B.  Moody,  P.  Szolovits,  L.  A.  Celi,  and  R.  G.  Mark.   MIMIC-III,  a  freely accessible critical care database. Scientific Data, 3, 2016.
+
+<a id="7">[7]</a> 
+Z. C. Lipton, D. C. Kale, and R. Wetzel. Modeling missing data in clinical timeseries with RNNs. In Machine Learning for Healthcare, 2016
